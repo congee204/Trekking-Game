@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up Page</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="signup-container">
+    <form class="signup-box" id="signupForm">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="repassword">Re-enter Password</label>
+      <input type="password" id="repassword" name="repassword" required>
+
+      <button type="submit" class="btn">Sign Up</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+      e.preventDefault(); // prevent form reload
+
+      const email = document.getElementById('email').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const repassword = document.getElementById('repassword').value;
+
+      // Check if passwords match
+      if (password !== repassword) {
+        alert('Passwords do not match. Please try again.');
+        return;
+      }
+
+      // Save user info in localStorage
+      localStorage.setItem('email', email);
+      localStorage.setItem('username', username);
+      localStorage.setItem('password', password);
+
+      alert('Account created successfully! You can now log in.');
+      window.location.href = 'login.html'; // redirect to login page
+    });
+  </script>
+</body>
+</html>

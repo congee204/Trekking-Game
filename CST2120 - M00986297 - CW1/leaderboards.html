@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Leaderboards</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="leaderboard-container">
+    <h2>Trekking Disaster Leaderboards</h2>
+    <p>(Ranked based on foods collected)</p>
+
+    <table id="leaderboardTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player Name</th>
+          <th>Time</th>
+          <th>High Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+
+    <button class="olive-button" onclick="clearLeaderboard()">Clear Leaderboard</button>
+  </div>
+
+  <script>
+    // Load data from localStorage
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    // Merge duplicate players and keep only their highest score
+    const uniquePlayers = {};
+    leaderboard.forEach(player => {
+      if (!uniquePlayers[player.name]) {
+        uniquePlayers[player.name] = player;
+      } else if (player.score > uniquePlayers[player.name].score) {
+        uniquePlayers[player.name] = player; // keep the one with higher score
+      }
+    });
+
+    // Convert back to an array
+    leaderboard = Object.values(uniquePlayers);
+
+    function displayLeaderboard() {
+      const tbody = document.querySelector("#leaderboardTable tbody");
+      tbody.innerHTML = "";
+
+      // Sort by high score (descending)
+      leaderboard.sort((a, b) => b.score - a.score);
+
+      leaderboard.forEach((player, index) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${index + 1}</td>
+          <td>${player.name}</td>
+          <td>${player.time}</td>
+          <td>${player.score}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function clearLeaderboard() {
+      if (confirm("Clear all leaderboard data?")) {
+        leaderboard = [];
+        localStorage.removeItem("leaderboard");
+        displayLeaderboard();
+      }
+    }
+
+    displayLeaderboard();
+  </script>
+</body>
+</html>

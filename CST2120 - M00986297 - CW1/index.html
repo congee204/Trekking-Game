@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>Trekking Disaster</title>
+        <link rel = "stylesheet" href = "styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class = "container">
+            <h1>TREKKING DISASTER</h1>
+            <p class = "sub-quote">survive the trek, dodge the wreck</p>
+
+            <div class = "buttons">
+                <a href="game.html" class="btn">Play As Guest</a>
+                <a href="login.html" class="btn">Login / Signup</a>
+                <a href="leaderboards.html" class="btn">Leaderboards</a>
+                <a href="howtoplay.html" class="btn">How To Play</a>
+            </div>
+        </div>
+        <script>
+        document.querySelector('a[href="game.html"]').addEventListener("click", () => {
+            sessionStorage.setItem("isGuest", "true");
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Page</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="login-container">
+    <form class="login-box" id="loginForm">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
+
+      <button type="submit" class="btn">Login</button>
+    </form>
+
+    <div class="signup-link">
+      <p>Don't have an account?</p>
+      <a href="signup.html" class="btn">Create An Account</a>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); // stop form from reloading the page
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Get saved user info from localStorage
+      const storedUsername = localStorage.getItem('username');
+      const storedPassword = localStorage.getItem('password');
+
+      // Check credentials
+      if (username === storedUsername && password === storedPassword) {
+        alert('Login successful!');
+        window.location.href = 'index2.html'; // redirect to homepage
+      } else {
+        alert('Invalid username or password. Try again.');
+      }
+    });
+  </script>
+</body>
+</html>
